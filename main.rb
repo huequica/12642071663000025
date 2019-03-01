@@ -1,6 +1,6 @@
 require 'pp'
 require 'miyabi'
-require 'romankana'
+require 'romkan'
 # for debug
 class Debug
   def initialize(constant_value)
@@ -41,6 +41,7 @@ Single_Replace_str = { '0' => %w[m ai], # 0
 # 8 : t, ya
 # 9 : ts, ie
 Double_Replace_str = { '00' => 'p', # 00
+                       '11' => 'x', # 11
                        '22' => 'h', # 22
                        '33' => 's', # 33
                        '44' => 'k', # 44
@@ -66,7 +67,7 @@ Double_Replace_str = { '00' => 'p', # 00
 # debug.eaching
 
 print '変換文字列を入力>>'
-testcase = readline.to_kanhira.to_roman
+p testcase = readline.to_kanhira.to_roma
 
 return_str = ''
 
