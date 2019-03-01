@@ -7,7 +7,7 @@ class Debug
     @constant_value = constant_value
   end
 
-  def eaching
+  def div
     @constant_value.each do |data|
       if data[1][1]
         puts "#{data[0]} : #{data[1][0]}, #{data[1][1]}"
@@ -45,7 +45,7 @@ Double_Replace_str = { '00' => 'p', # 00
                        '22' => 'h', # 22
                        '33' => 's', # 33
                        '44' => 'k', # 44
-                       '55' => 'v', # 55
+                       '55' => 'w', # 55
                        '66' => 'g', # 66
                        '77' => 'f', # 77
                        '88' => 'b', # 88
@@ -61,14 +61,18 @@ Double_Replace_str = { '00' => 'p', # 00
 # 99 : r
 
 # debug = Debug.new(Single_Replace_str)
-# debug.eaching
+# debug.div
 # puts ''
 # debug = Debug.new(Double_Replace_str)
-# debug.eaching
+# debug.div
 
 print '変換文字列を入力>>'
-p testcase = readline.to_kanhira.to_roma
-
+testcase = readline.chomp!
+begin
+  p testcase = testcase.to_kanhira.to_roma
+rescue Mechanize::ResponseCodeError
+  p testcase = testcase.to_roma
+end
 return_str = ''
 
 while testcase != ''
