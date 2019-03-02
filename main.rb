@@ -1,4 +1,3 @@
-require 'pp'
 require 'miyabi'
 require 'romkan'
 # for debug
@@ -67,7 +66,8 @@ Double_Replace_str = { '00' => 'p', # 00
 # debug.div
 
 print '変換文字列を入力>>'
-testcase = readline.chomp!
+# testcase = readline.chomp!
+testcase = '雲仙冥加'
 begin
   p testcase = testcase.to_kanhira.to_roma
 rescue Mechanize::ResponseCodeError
