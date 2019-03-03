@@ -65,25 +65,26 @@ Double_Replace_str = { '00' => 'p', # 00
 # debug = Debug.new(Double_Replace_str)
 # debug.div
 
-print '変換文字列を入力>>'
-# testcase = readline.chomp!
-testcase = '雲仙冥加'
+
+puts convert_text = ARGV[0]
 begin
-  p testcase = testcase.to_kanhira.to_roma
+  convert_text = convert_text.to_kanhira.to_roma
 rescue Mechanize::ResponseCodeError
-  p testcase = testcase.to_roma
+  convert_text = convert_text.to_roma
 end
 return_str = ''
 
-while testcase != ''
+while convert_text != ''
+  # 見つからなかったときのためのフラグ
+  notfound_flag = true
 
   # 2つ文字を先に判定させてあった場合脱出
   Double_Replace_str.each do |str|
-    next unless testcase[0] == str[1]
+    next unless convert_text[0] == str[1]
 
-    testcase.slice!(0)
+    convert_text.slice!(0)
     return_str += str[0]
-
+    notfound_flag = false
     break
     # Double_Replace_str.each
   end
@@ -91,21 +92,23 @@ while testcase != ''
   Single_Replace_str.each do |str|
     str0_length = str[1][0].size - 1
     str1_length = str[1][1].size - 1
-    if testcase[0..str0_length] == str[1][0]
+    if convert_text[0..str0_length] == str[1][0]
 
-      testcase.slice!(0..str0_length)
+      convert_text.slice!(0..str0_length)
       return_str += str[0]
+      notfound_flag = false
 
-    elsif testcase[0..str1_length] == str[1][1]
+    elsif convert_text[0..str1_length] == str[1][1]
 
-      testcase.slice!(0..str1_length)
+      convert_text.slice!(0..str1_length)
       return_str += str[0]
+      notfound_flag = false
 
     end
-    # Single_Replace_str.each
-
-    # if d_flag != true
   end
-  # while testcase
+  if notfound_flag then
+    puts "#{convert_text[0]}が見つからなかったので飛ばしました"
+    convert_text.slice!(0)
+  end
 end
 puts return_str
