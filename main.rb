@@ -66,7 +66,7 @@ Double_Replace_str = { '00' => 'p', # 00
 # debug.div
 
 
-puts convert_text = ARGV[0]
+convert_text = ARGV[0]
 begin
   convert_text = convert_text.to_kanhira.to_roma
 rescue Mechanize::ResponseCodeError
