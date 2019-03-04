@@ -106,7 +106,14 @@ while convert_text != ''
 
     end
   end
-  if notfound_flag then
+
+  if convert_text[0] == '、' || convert_text[0] == '。'
+    return_str += convert_text[0]
+    convert_text.slice!(0)
+    notfound_flag = false
+  end
+
+  if notfound_flag
     puts "#{convert_text[0]}が見つからなかったので飛ばしました"
     convert_text.slice!(0)
   end
