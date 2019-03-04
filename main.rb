@@ -68,7 +68,7 @@ Double_Replace_str = { '00' => 'p', # 00
 
 convert_text = ARGV[0]
 begin
-  convert_text = convert_text.to_kanhira.to_roma
+  convert_text = convert_text.to_kanhira.to_hira.to_roma
 rescue Mechanize::ResponseCodeError
   convert_text = convert_text.to_roma
 end
@@ -107,15 +107,15 @@ while convert_text != ''
     end
   end
 
-  if convert_text[0] == '、' || convert_text[0] == '。'
-    return_str += convert_text[0]
-    convert_text.slice!(0)
-    notfound_flag = false
-  end
-
   if notfound_flag
-    puts "#{convert_text[0]}が見つからなかったので飛ばしました"
-    convert_text.slice!(0)
+    if convert_text[0] != "'"
+      return_str += convert_text[0]
+      convert_text.slice!(0)
+      notfound_flag = false
+    else
+      puts "#{convert_text[0]}が見つからなかったので飛ばしました"
+      convert_text.slice!(0)
+    end
   end
 end
 puts return_str
