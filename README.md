@@ -39,3 +39,15 @@
 3. 上記のアルファベットを数字に置き換えていく。  
 `unzen`は`12642`という感じ  
 結果としては`12642071663`になる
+
+# 使用例 Sample Code
+``` ruby
+require './main'
+unzen_lang = Unzen_lang.new
+puts unzen_lang.convert(ARGV[0])
+```
+
+``` bash
+$ ruby example.rb 雲仙冥加
+12642071663
+```
