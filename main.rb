@@ -17,8 +17,6 @@ end
 
 # convert
 class Unzen_lang
-  require 'miyabi'
-  require 'romkan'
   def initialize; end
 
   Single_Replace_str = { '0' => %w[m ai], # 0
@@ -44,12 +42,23 @@ class Unzen_lang
   attr_reader :Single_Replace_str
   attr_reader :Double_Replace_str
 
+  def hira_to_roma(hira_text)
+    require 'romkan'
+    hira_text.to_roma
+  end
+
   def convert(convert_text)
+    require 'miyabi'
     begin
-      convert_text = convert_text.to_kanhira.to_hira.to_roma
+      convert_text = +convert_text #インスタンスが凍ってるので解答
+      convert_text = convert_text.force_encoding('UTF-8') # 文字コードを強制的にUTF-8にする
+      convert_text = convert_text.to_kanhira
     rescue Mechanize::ResponseCodeError
-      convert_text = convert_text.to_roma
+
     end
+
+    convert_text = hira_to_roma(convert_text.to_hira)
+
     return_str = ''
 
     while convert_text != ''
